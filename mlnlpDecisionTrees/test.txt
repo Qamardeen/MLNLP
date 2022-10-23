@@ -1,0 +1,10 @@
+
+whether 11 acting justice nield said he had " wavered " in deciding _______ jail time was an appropriate punishment , but rejected this option .
+whether 4 it was not clear _______ the militia had arrested the women or why .
+whether 6 as it happens , debates over _______ it 's okay for the cia to kill foreign nationals ( leaving aside u.s. citizens ) , and under what circumstances , have been going on for years .
+whether 11 mr schleicher is a robust defender of such comparisons , saying _______ or not they are fair , young people from all those countries are competing with one another in a globalised economy .
+weather 24 he added : " the delays in the climate system mean that the greenhouse gases in the atmosphere now will determine climate and therefore _______ for the next 25 years . "
+weather 24 ohio 's attorney general , michael dewine , said last week he would announce after the verdict in the trial whethermore people would be _______ .
+
+
+label index word_before_label word_after_label len_of_sentence
