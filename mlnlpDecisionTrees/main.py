@@ -86,22 +86,21 @@ def get_sub_table(df, node_attr, value):
     return df[df[node_attr] == value].reset_index(drop=True)
 
 
-def build_tree(df, tree=None, curr_lvl=0):
+def build_tree(df, max_depth, tree=None, curr_lvl=0):
     Class = 'label'
-    if curr_lvl >= 100:
-        return tree
     node = get_best_info_gain(df)
     att_value = np.unique(df[node])
     if tree is None:
         tree = {}
         tree[node] = {}
+
     for value in att_value:
         sub_table = get_sub_table(df, node, value)
-        cl_value, counts = np.unique(sub_table[Class], return_counts=True)
-        if len(counts) == 1:
-            tree[node][value] = cl_value[0]
+        values_counts = sub_table[Class].value_counts()
+        if len(values_counts) == 1 or curr_lvl >= max_depth:
+            tree[node][value] = values_counts.idxmax()
         else:
-            tree[node][value] = build_tree(sub_table, curr_lvl=curr_lvl+1)
+            tree[node][value] = build_tree(sub_table, max_depth, None, curr_lvl + 1)
     return tree
 
 
@@ -112,7 +111,7 @@ df = pd.read_csv("attribute_table_output.txt")
 df = df.sample(frac=0.1)
 print(df)
 
-tree = build_tree(df)
+tree = build_tree(df, 5)
 pprint.pprint(tree)
 
 print(df.keys())
