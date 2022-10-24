@@ -1,0 +1,72 @@
+1)
+a)notA or B or notC
+                              !A                    # not A is the root node
+                    T                   F           # !A branches off into T and F values for true and false respectively
+                    B                  TRUE         # F evaluate to true and T continues to evaluate the expression
+                 T     F                            # B branches off into T and F values for true and false respectively
+               TRUE    !C                           # T evaluates to True F continues to evaluate
+                     T     F                        # !C branches off into T and F values for true and false respectively
+                   FALSE  TRUE                      # T evaluates to FALSE F evaluates to TRUE
+
+
+b)A or (notB and C)
+                                A                   # A is the root node
+                T                            F      # A branches off into T and F values for true and false respectively
+                !B                         FALSE    # F evaluates to FALSE T continues to evaluate
+            T       F                               # !B branches off into T and F values for true and false respectively
+            C      TRUE                             # F evaluates to TRUE T continues to evaluate
+        T       F                                   # C branches off into T and F values for true and false respectively
+      TRUE    FALSE                                 # T evaluates to TRUE F evaluates to FALSE
+
+2)
+a)
+Entropy(S) = -3/6(log(3/6))-3/6(log(3/6)) = 1
+
+b)
+Entropy(a2_T) = -2/4(log(2/4))-2/4(log(2/4)) = 1
+Entropy(a2_F) = -1/2(log(1/2))-1/2(log(1/2)) = 1
+Information_gain(a2) = 1 - 4/6Entropy(a2_T)-2/6Entropy(a2_F)
+1-4/6(1)-2/6*1 = 2/6 - 2/6 = 0
+
+3)
+For this project i used a bag of words feature to test the trained data.
+first i would format the given data files into a column like structure where the information in the columns would be meaningful
+the words used are hardcoded top 100 words i think would have been helpful
+and the label
+label + top 100 words would make up the keys to the table
+and the attributes would have values from None, 1Before, 1After considering if the events occured
+This was all handled in preprocessing
+
+to create the decision tree i first created some methods to help calculate the entropy and information gain following the formulas
+def get_entropy(df)
+def get_entropy_attribute(df, attribute)
+def get_best_info_gain(df)
+
+tree = build_tree(df, 3) # where 3 is the max depth
+df = df.sample(frac=0.5) # where 0.5 is 50% of the data set
+
+max depth 3
+1740 training examples, accuracy 86.16%
+3480 training examples, accuracy 86.26%
+8700 training examples, accuracy 86.76%
+13920 training examples, accuracy 86.86%
+17400 training examples, accuracy 86.86%
+
+max depth 5
+1740 training examples, accuracy 87.77%
+3480 training examples, accuracy 87.97%
+8700 training examples, accuracy 87.37%
+13920 training examples, accuracy 87.77%
+17400 training examples, accuracy 87.77%
+
+max depth 10
+1740 training examples, accuracy 87.57%
+3480 training examples, accuracy 89.89%
+8700 training examples, accuracy 89.19%
+13920 training examples, accuracy 88.28%
+17400 training examples, accuracy 88.88%
+
+Finding good features to give good accuracy was very interesting to accomplish
+I noticed that on average increasing the depth of the tree returned better results compared to increasing the training size
+where in some case increasing the training size returned less favorable accuracy measurements
+

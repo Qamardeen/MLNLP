@@ -104,22 +104,6 @@ def build_tree(df, max_depth, tree=None, curr_lvl=0):
     return tree
 
 
-eps = np.finfo(float).eps
-
-df = pd.read_csv("attribute_table_output.txt")
-
-df = df.sample(frac=0.1)
-print(df)
-
-tree = build_tree(df, 5)
-pprint.pprint(tree)
-
-print(df.keys())
-print(get_entropy(df))
-# for each in df.keys()[1:]:
-#    print(get_entropy_attribute(df, each))
-
-
 # Testing
 def test_data(test, tree, default=None):
     attribute = next(iter(tree))
@@ -134,6 +118,16 @@ def test_data(test, tree, default=None):
             return result
     else:
         return default
+
+
+eps = np.finfo(float).eps
+
+df = pd.read_csv("attribute_table_output.txt")
+
+df = df.sample(frac=1)
+print(df)
+tree = build_tree(df, 10)
+pprint.pprint(tree)
 
 test_file = open('hw1.test.col', 'r', encoding='utf-8')
 tests = []
@@ -162,14 +156,17 @@ count_false = 0
 for test in tests:
     cat = (test_data(test, tree))
     result = cat == test['label']
-    print(result)
+    # print(result)
     if result == True:
         count_true +=1
     else:
         count_false +=1
 print(count_true / (count_false + count_true))
 
-
+# print(df.keys())
+# print(get_entropy(df))
+# for each in df.keys()[1:]:
+#    print(get_entropy_attribute(df, each))
 
 #ans = test_data(test, tree)
 #print(ans)
