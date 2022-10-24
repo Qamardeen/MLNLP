@@ -124,9 +124,9 @@ eps = np.finfo(float).eps
 
 df = pd.read_csv("attribute_table_output.txt")
 
-df = df.sample(frac=1)
+df = df.sample(frac=.1)
 print(df)
-tree = build_tree(df, 10)
+tree = build_tree(df, 2)
 pprint.pprint(tree)
 
 test_file = open('hw1.test.col', 'r', encoding='utf-8')
